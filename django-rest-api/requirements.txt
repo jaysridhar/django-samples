@@ -1,0 +1,6 @@
+django
+mysqlclient
+mysql-connector
+djangorestframework
+gunicorn
+pyflakes
