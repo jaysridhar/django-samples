@@ -1,6 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.views import APIView
@@ -18,7 +18,7 @@ class SelfView(APIView):
         return JsonResponse(content, safe=False)
 
 @api_view(['GET'])
-@authentication_classes([SessionAuthentication, BasicAuthentication])
+@authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def self_view(request, format=None):
     content = {
