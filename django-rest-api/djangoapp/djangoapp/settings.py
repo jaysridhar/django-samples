@@ -27,17 +27,21 @@ SECRET_KEY = ENVCONF['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ENVCONF['DEBUG'].lower() == 'true'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ENVCONF['ALLOWED_HOSTS'].split(',')
+CSRF_TRUSTED_ORIGINS = ENVCONF['CSRF_TRUSTED_ORIGINS'].split(',')
 
 # Application definition
 
 INSTALLED_APPS = [
+    'webapp.apps.WebappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -102,6 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_URL = '/auth/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
